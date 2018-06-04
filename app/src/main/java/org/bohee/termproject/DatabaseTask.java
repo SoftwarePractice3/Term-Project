@@ -44,9 +44,11 @@ public class DatabaseTask extends AsyncTask<String, Void, String> {
             URL url = new URL(serverURL);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
+
             httpURLConnection.setReadTimeout(5000);
             httpURLConnection.setConnectTimeout(5000);
             httpURLConnection.connect();
+
 
             int responseStatusCode = httpURLConnection.getResponseCode();
             Log.d(TAG, "response code - " + responseStatusCode);
@@ -59,6 +61,7 @@ public class DatabaseTask extends AsyncTask<String, Void, String> {
                 inputStream = httpURLConnection.getErrorStream();
             }
 
+
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -68,6 +71,7 @@ public class DatabaseTask extends AsyncTask<String, Void, String> {
             while((line = bufferedReader.readLine()) != null){
                 sb.append(line);
             }
+
 
             bufferedReader.close();
 
@@ -85,7 +89,7 @@ public class DatabaseTask extends AsyncTask<String, Void, String> {
         Log.d(TAG, "response  - " + s);
         mJsonString = s;
         getData();
-        //Toast.makeText(context,"size in post:"+ mJsonString, Toast.LENGTH_LONG).show();
+        //Toast.makeText(context,"size in post:"+ tempArrayList.size(), Toast.LENGTH_LONG).show();
     }
 
     private void getData(){
