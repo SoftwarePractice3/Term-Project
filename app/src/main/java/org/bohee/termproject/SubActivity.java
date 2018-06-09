@@ -2,14 +2,18 @@ package org.bohee.termproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 public class SubActivity extends Activity {
     String storeName;
@@ -24,6 +28,7 @@ public class SubActivity extends Activity {
         setContentView(R.layout.activity_sub);
         textView=(TextView)findViewById(R.id.textView2);
         webView = (WebView)findViewById(R.id.webView);
+        Button mapView = (Button) findViewById(R.id.navermap);
 
         Intent intent = getIntent();
         storeName = intent.getStringExtra("storeName");
@@ -66,15 +71,29 @@ public class SubActivity extends Activity {
             default:
                 break;
         }
+
+        mapView.setOnClickListener(onClickListener);
+
     }
+
+    Button.OnClickListener onClickListener = new View.OnClickListener(){
+        public void onClick(View v){
+            Intent mapintent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.map.naver.com/search2/search.nhn?query=" + address + "&sm=hty#/map"));
+            startActivity(mapintent);
+        }
+    };
+
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-        if(keyCode == KeyEvent.KEYCODE_BACK){ //webview에서 다른 페이지로 이동했을 때는 main activity가 아니라 그전 페이지로 돌아가기
-            if(webView.canGoBack()){
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (webView.canGoBack()) {
                 webView.goBack();
                 return false;
             }
         }
+
         return super.onKeyDown(keyCode, event);
     }
+
+
 }
