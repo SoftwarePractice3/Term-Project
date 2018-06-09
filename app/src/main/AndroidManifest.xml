@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".SubActivity">
+        <activity
+            android:name=".SubActivity">
         </activity>
     </application>
 

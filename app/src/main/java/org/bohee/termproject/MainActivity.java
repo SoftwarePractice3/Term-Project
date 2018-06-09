@@ -55,7 +55,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MyItems item=(MyItems)adapterView.getItemAtPosition(i);
                 String storeName=item.getStoreName();
+                String address = item.getAddress();
                 Intent intent=new Intent(getApplicationContext(), SubActivity.class);
+                intent.putExtra("storeName", storeName);
+                intent.putExtra("address", address);
+                intent.putExtra("ithStore", i);
                 startActivity(intent);
             }
         });
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         for(int i = 0; i< restaurantList.size(); i++){
             int table_2 = Integer.parseInt(restaurantList.get(i).get("table_2"));
             int table_4 = Integer.parseInt(restaurantList.get(i).get("table_4"));
-            adapter.addItem(restaurantList.get(i).get("name"), restaurantList.get(i).get("type"), table_2, table_4);
+            adapter.addItem(restaurantList.get(i).get("name"), restaurantList.get(i).get("type"), table_2, table_4, restaurantList.get(i).get("address"));
         }
 
         listView.setAdapter(adapter);

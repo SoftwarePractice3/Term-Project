@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
@@ -15,20 +15,24 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="음식점 이름"
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1.0"
+    android:padding= "16dp">
 
-    <TextView
-        android:text="이 부분에 지도 기능 넣으세요!"
+    <WebView
+        android:id="@+id/webView"
         android:gravity="center"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:background="#C2C2C2" />
+
+</LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,20 +42,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="메뉴판"
-            android:textSize="17dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"/>
 
-        <TextView
-            android:text="이 부분에 메뉴판 넣을게요!"
-            android:gravity="center"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_width="350dp"
-            android:layout_height="300dp"
-            android:background="#C2C2C2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#C2C2C2" />
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 </ScrollView>

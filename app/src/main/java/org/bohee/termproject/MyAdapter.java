@@ -59,13 +59,14 @@ public class MyAdapter extends BaseAdapter {
         return view;
     }
 
-    public void addItem(String storeName, String foodType, int table2, int table4){
+    public void addItem(String storeName, String foodType, int table2, int table4, String address){
         MyItems item=new MyItems();
 
         item.setStoreName(storeName);
         item.setFoodType(foodType);
         item.setTable2(table2);
         item.setTable4(table4);
+        item.setAddress(address);
 
         list.add(item);
     }
