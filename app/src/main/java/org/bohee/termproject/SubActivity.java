@@ -6,13 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 public class SubActivity extends Activity {
@@ -29,6 +29,7 @@ public class SubActivity extends Activity {
         textView=(TextView)findViewById(R.id.textView2);
         webView = (WebView)findViewById(R.id.webView);
         Button mapView = (Button) findViewById(R.id.navermap);
+        PhotoViewAttacher mAttacher;
 
         Intent intent = getIntent();
         storeName = intent.getStringExtra("storeName");
@@ -51,6 +52,7 @@ public class SubActivity extends Activity {
 
         imageView = (ImageView)findViewById(R.id.imageView);
         imageView.setScaleType(ImageView.ScaleType.FIT_START);
+        mAttacher = new PhotoViewAttacher(imageView);
 
         switch (storeId) {
             case 0:
