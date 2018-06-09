@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private ListView listView;
     private MyAdapter adapter;
     private TextView textView;
-    private Button updateButton;
+    private ImageButton updateButton;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        updateButton =(Button)findViewById(R.id.updateButton);
+        updateButton =(ImageButton)findViewById(R.id.updateButton);
         textView=(TextView)findViewById(R.id.textView);
         listView=(ListView)findViewById(R.id.listView);
         swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
