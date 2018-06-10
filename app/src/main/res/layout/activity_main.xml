@@ -14,12 +14,27 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
             android:text="업데이트 시간 : xx:yy:zz"
             android:textSize="16dp" />
+
+        <ImageButton
+            android:id="@+id/updateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:baselineAlignBottom="false"
+            android:padding="5dp" />
+  #          android:src="@drawable/update_button" />
+            android:layout_weight="1"
+            android:text="Update" />
 
     </LinearLayout>
 
