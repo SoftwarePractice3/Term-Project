@@ -19,7 +19,7 @@ public class SubActivity extends Activity {
     String storeName;
     String address;
     int storeId;
-    TextView textView;
+    TextView textView, hours;
     WebView webView;
     ImageView imageView;
 
@@ -27,6 +27,7 @@ public class SubActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
         textView=(TextView)findViewById(R.id.textView2);
+        hours=(TextView)findViewById(R.id.hours);
         webView = (WebView)findViewById(R.id.webView);
         Button mapView = (Button) findViewById(R.id.navermap);
         PhotoViewAttacher mAttacher;
@@ -57,18 +58,23 @@ public class SubActivity extends Activity {
         switch (storeId) {
             case 0:
                 imageView.setImageResource(R.drawable.mealplanb);
+                hours.setText("AM 10:00 ~ PM 10:00");
                 break;
             case 1:
                 imageView.setImageResource(R.drawable.ungsaeng);
+                hours.setText("AM 12:00 ~ PM 11:00");
                 break;
             case 2:
                 imageView.setImageResource(R.drawable.bonzi);
+                hours.setText("AM 11:00 ~ PM 9:00");
                 break;
             case 3:
                 imageView.setImageResource(R.drawable.momstouch);
+                hours.setText("AM 10:00 ~ PM 11:00");
                 break;
             case 4:
                 imageView.setImageResource(R.drawable.naezzim);
+                hours.setText("AM 11:30 ~ PM 10:00");
                 break;
             default:
                 break;

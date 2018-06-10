@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private ListView listView;
     private MyAdapter adapter;
     private TextView textView;
-    private ImageButton updateButton;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -35,20 +34,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        updateButton =(ImageButton)findViewById(R.id.updateButton);
-        textView=(TextView)findViewById(R.id.textView);
-        listView=(ListView)findViewById(R.id.listView);
-        swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        textView = (TextView) findViewById(R.id.textView);
+        listView = (ListView) findViewById(R.id.listView);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         updateTime();
         getRestaurant(SERVER_URL); // get restaurant list from server
-        new Handler().postDelayed(new Runnable()
-        {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void run()
-            {
-                //Toast.makeText(MainActivity.this,"size in handler:"+ restaurantList.size(), Toast.LENGTH_LONG).show();
+            public void run() {
                 setData();
             }
         }, 500);// 0.005초 정도 딜레이를 준 후 시작
@@ -57,42 +52,22 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MyItems item=(MyItems)adapterView.getItemAtPosition(i);
-                String storeName=item.getStoreName();
+                MyItems item = (MyItems) adapterView.getItemAtPosition(i);
+                String storeName = item.getStoreName();
                 String address = item.getAddress();
-                Intent intent=new Intent(getApplicationContext(), SubActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SubActivity.class);
                 intent.putExtra("storeName", storeName);
                 intent.putExtra("address", address);
                 intent.putExtra("ithStore", i);
                 startActivity(intent);
             }
         });
-
-        updateButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                restaurantList.clear();
-                updateTime();
-                getRestaurant(SERVER_URL); // get restaurant list from server
-                new Handler().postDelayed(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        setData();
-                        adapter.notifyDataSetChanged();
-                        Toast.makeText(MainActivity.this,"좌석 수가 업데이트 되었습니다.", Toast.LENGTH_LONG).show();
-                    }
-                }, 500);// 0.005초 정도 딜레이를 준 후 시작
-            }
-        });
-
     }
 
     // set store information
-    private void setData(){
-        adapter=new MyAdapter();
-        for(int i = 0; i< restaurantList.size(); i++){
+    private void setData() {
+        adapter = new MyAdapter();
+        for (int i = 0; i < restaurantList.size(); i++) {
             int table_2 = Integer.parseInt(restaurantList.get(i).get("table_2"));
             int table_4 = Integer.parseInt(restaurantList.get(i).get("table_4"));
             adapter.addItem(restaurantList.get(i).get("name"), restaurantList.get(i).get("type"), table_2, table_4, restaurantList.get(i).get("address"));
@@ -101,29 +76,34 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         listView.setAdapter(adapter);
     }
 
-    // refresh data of restaurants
-    @Override
-    public void onRefresh() {
-        updateTime();
-        swipeRefreshLayout.setRefreshing(false);
-    }
 
     // update to current time
-    private void updateTime(){
-        long now=System.currentTimeMillis();
-        Date date=new Date(now);
-        SimpleDateFormat sdf=new SimpleDateFormat("HH-mm-ss");
-        String time=sdf.format(date);
-        textView.setText("업데이트 시간: "+time);
-    }
-
-    // print information of each restaurant
-    private void printInfo(AlertDialog.Builder builder, int i){
-        builder.setMessage("지도\n");
+    private void updateTime() {
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss");
+        String time = sdf.format(date);
+        textView.setText("업데이트 시간: " + time);
     }
 
     private void getRestaurant(String SERVER_URL) {
         DatabaseTask databaseTask = new DatabaseTask(getApplicationContext(), restaurantList);
         databaseTask.execute(SERVER_URL);
+    }
+
+    @Override
+    public void onRefresh() {
+        restaurantList.clear();
+        getRestaurant(SERVER_URL); // get restaurant list from server
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setData();
+                adapter.notifyDataSetChanged();
+                Toast.makeText(MainActivity.this, "좌석 수가 업데이트 되었습니다.", Toast.LENGTH_LONG).show();
+            }
+        }, 500);// 0.005초 정도 딜레이를 준 후 시작
+        updateTime();
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
