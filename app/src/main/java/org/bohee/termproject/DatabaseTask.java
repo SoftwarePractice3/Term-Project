@@ -25,6 +25,7 @@ public class DatabaseTask extends AsyncTask<String, Void, String> {
     private static final String TAG_ADDRESS ="address";
     private static final String TAG_TABLE_2 ="table_2";
     private static final String TAG_TABLE_4 ="table_4";
+    private static final String TAG_HOURS="hours";
 
     private static String mJsonString;
     private ArrayList<HashMap<String, String>> tempArrayList;
@@ -106,6 +107,7 @@ public class DatabaseTask extends AsyncTask<String, Void, String> {
                 String address = item.getString(TAG_ADDRESS);
                 String table_2 = item.getString(TAG_TABLE_2);
                 String table_4 = item.getString(TAG_TABLE_4);
+                String hours = item.getString(TAG_HOURS);
 
                 HashMap<String,String> hashMap = new HashMap<>();
 
@@ -114,6 +116,7 @@ public class DatabaseTask extends AsyncTask<String, Void, String> {
                 hashMap.put(TAG_ADDRESS, address);
                 hashMap.put(TAG_TABLE_2, table_2);
                 hashMap.put(TAG_TABLE_4, table_4);
+                hashMap.put(TAG_HOURS, hours);
 
                 tempArrayList.add(hashMap);
             }
