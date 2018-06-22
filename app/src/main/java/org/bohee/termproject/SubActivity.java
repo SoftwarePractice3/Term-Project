@@ -18,16 +18,18 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class SubActivity extends Activity {
     String storeName;
     String address;
+    String hours;
     int storeId;
-    TextView textView, hours;
+    TextView textView, textHours;
     WebView webView;
     ImageView imageView;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
+
         textView=(TextView)findViewById(R.id.textView2);
-        hours=(TextView)findViewById(R.id.hours);
+        textHours=(TextView)findViewById(R.id.textHours);
         webView = (WebView)findViewById(R.id.webView);
         Button mapView = (Button) findViewById(R.id.navermap);
         PhotoViewAttacher mAttacher;
@@ -36,8 +38,10 @@ public class SubActivity extends Activity {
         storeName = intent.getStringExtra("storeName");
         address = intent.getStringExtra("address");
         storeId = intent.getIntExtra("ithStore",0);
+        hours = intent.getStringExtra("hours");
 
         textView.setText(storeName);
+        textHours.setText(hours);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -58,23 +62,18 @@ public class SubActivity extends Activity {
         switch (storeId) {
             case 0:
                 imageView.setImageResource(R.drawable.mealplanb);
-                hours.setText("AM 10:00 ~ PM 10:00");
                 break;
             case 1:
                 imageView.setImageResource(R.drawable.ungsaeng);
-                hours.setText("AM 12:00 ~ PM 11:00");
                 break;
             case 2:
                 imageView.setImageResource(R.drawable.bonzi);
-                hours.setText("AM 11:00 ~ PM 9:00");
                 break;
             case 3:
                 imageView.setImageResource(R.drawable.momstouch);
-                hours.setText("AM 10:00 ~ PM 11:00");
                 break;
             case 4:
                 imageView.setImageResource(R.drawable.naezzim);
-                hours.setText("AM 11:30 ~ PM 10:00");
                 break;
             default:
                 break;
